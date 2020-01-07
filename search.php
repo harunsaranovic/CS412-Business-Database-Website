@@ -1,16 +1,12 @@
 <?php
 include 'connect.php';
 session_start();
-$page = 0;
-if(isset($_GET['page']))
-  $page = $_GET['page'];
-$page *= 5;
-$sqlquery = "SELECT id, name, category FROM companies LIMIT 5 OFFSET " . $page;
+$word = $_POST['word'];
+$sqlquery = "SELECT id, name, category FROM companies WHERE name LIKE '%". $word ."%';";
 $sqlqueryblog = "SELECT id, title, date, image FROM blog LIMIT 3 OFFSET 0;";
 $companies = mysqli_query($conn, $sqlquery);
 $blogs = mysqli_query($conn, $sqlqueryblog);
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -67,36 +63,8 @@ $blogs = mysqli_query($conn, $sqlqueryblog);
     }?>
   </div>
 
-  <div class="pages">
-    <?php for($i = 0; $i < 28; $i++){
-      ?>
-      <a href="index.php?page=<?php echo $i; ?>" class="page <?php if($page/5 == $i) echo 'current-page'; ?>" ><?php echo $i+1; ?></a>
-    <?php
-    } ?>
-  </div>
     <div class="spacing"></div>
     <div class="spacing"></div>
-
-  <div class="blog-list">
-    <?php
-    while($blog = $blogs->fetch_array()){
-    ?>
-    <a href="blog.php?id=<?php echo $blog['id']; ?>&name=<?php echo $blog['title']; ?>">
-      <div class="blog-box">
-        <div class="blog-box-img" style="background-image: url(img/<?php echo $blog['image']; ?>)">
-        </div>
-        <div class="blog-box-title">
-          <h3><?php echo $blog['title']; ?></h3>
-        </div>
-        <h5><?php echo $blog['date']; ?></h5>
-      </div>
-    </a>
-    <?php
-    }?>
-  </div>
-
-  <div class="spacing"></div>
-  <div class="spacing"></div>
   <div class="spacing"></div>
   <div class="spacing"></div>
 

@@ -517,3 +517,21 @@ th{
   margin: 50px 0 50px 15%;
   font-weight: 300;
 }
+
+.box-right{
+  display: none;
+}
+
+.pages{
+  text-align: center;
+}
+
+.page{
+  padding: 5px 8px;
+  -width: 15px;
+}
+
+.current-page{
+    background-color: #00d4ad !important;
+    color: #fff;
+}
